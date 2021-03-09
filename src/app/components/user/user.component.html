@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10 col-sm-6 col-md-10 user-page">
+      <div class="user-heading">
+        <h4 class="text-center">Users Info</h4>
+      </div>
+      <div class="">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" (click)="getUsers()" href="#usersList">Users List </a></li>
+          <li><a data-toggle="tab" href="#createUser">Create New User</a></li>
+          <li><a data-toggle="tab" href="#saveUsers">Save Users</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="usersList" class="tab-pane fade in active">
+            <div class="user1" *ngIf="users.length > 0">
+              <h3>Users List</h3>
+              <table class="table table-sm table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>S.NO</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of users; index as i">
+                    <td>{{i +1}}</td>
+                    <td><a href="" [routerLink]="['/userInfo',item?.userId]"
+                        routerLinkActive="router-link-active">{{item.firstName}}</a></td>
+                    <td>{{item.lastName}}</td>
+                    <td>{{item.email}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div id="createUser" class="tab-pane fade">
+            <div class="add">
+              <p>Create New User</p>
+              <form [formGroup]='createUserForm' (ngSubmit)='createUser()'>
+                <div class="form-group">
+                  <!-- <label for="firstName">firstName</label> -->
+                  <input type="text" class="form-control" formControlName="firstName" placeholder="First Name">
+                  <div *ngIf="createUserForm.get('firstName').touched && createUserForm.get('firstName').invalid"
+                    class="alert alert-danger">
+                    <div *ngIf="createUserForm.get('firstName').getError('required')">
+                      please enter your First Name
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name">
+                  <div *ngIf="createUserForm.get('lastName').touched && createUserForm.get('lastName').invalid"
+                    class="alert alert-danger">
+                    <div *ngIf="createUserForm.get('lastName').getError('required')">
+                      please enter Last Name
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <!-- <label for="email">Email</label> -->
+                  <input type="email" formControlName="email" class="form-control" #mdrefvaremail placeholder="Email">
+                  <div *ngIf="createUserForm.get('email').touched && createUserForm.get('email').invalid"
+                    class="alert alert-danger">
+                    Please enter your email
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button type="submit" [disabled]='!createUserForm.valid' class='btn btn-primary'>Create User</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div id="saveUsers" class="tab-pane fade">
+            <div class="add">
+              <p>Save New User</p>
+              <form [formGroup]='pageForm' (ngSubmit)='saveUsers()'>
+                <div class="form-group">
+                  <!-- <label for="phoneNumber">phoneNumber</label> -->
+                  <div class="form-check form-check-inline">
+                    <input type="number" #mdrefvarphoneNumber class="form-control" formControlName="pageNumber"
+                      placeholder="page number">
+                  </div>
+
+                  <div *ngIf="pageForm.get('pageNumber').touched && pageForm.get('pageNumber').invalid"
+                    class="alert alert-danger">
+                    <div *ngIf="pageForm.get('pageNumber').getError('required')">
+                      please enter pageNumber
+                    </div>
+                    <div *ngIf="pageForm.get('pageNumber').getError('pattern')">
+                      Accepts 1 digits
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <button type="submit" [disabled]='!pageForm.valid' class='btn btn-primary'>Save Users</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br><br> <br><br>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="st-navbar">
+  <nav class="navbar navbar-expand-md" style="background-color: #aec0cc;">
+    <a href="#" class="navbar-brand">
+      <img src="../../../assets/images/logo.png" height="32" alt="CoolBrand">
+    </a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <!-- <div class="navbar-nav">
+        <a href="#" class="nav-item nav-link active">Home</a>
+        <a href="#" class="nav-item nav-link">Profile</a>
+        <a href="#" class="nav-item nav-link">Messages</a>
+        <a href="#" class="nav-item nav-link disabled" tabindex="-1">Reports</a>
+      </div> -->
+      <div class="navbar-nav ml-auto">
+        <a class="nav-item nav-link" *ngIf="!authService.isLoggedIn()">
+          <button class="btn btn-outline-primary" [routerLink]="['/register']"
+            routerLinkActive="router-link-active">Register</button></a>
+        <a class="nav-item nav-link" *ngIf="!authService.isLoggedIn()">
+          <button class="btn btn-outline-success" [routerLink]="['/login']" routerLinkActive="router-link-active">Sign
+            In</button></a>
+        <li class="nav-item dropdown" *ngIf="authService.isLoggedIn()">
+          <button class="btn btn-outline-primary dropdown-toggle" href="" data-toggle="dropdown"
+            data-target="#profile_target">Profile
+          </button>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profile_target">
+            <a href="" class="dropdown-item" (click)="authService.logoutUser()">Logout</a>
+          </div>
+        </li>
+      </div>
+    </div>
+  </nav>
+</div>

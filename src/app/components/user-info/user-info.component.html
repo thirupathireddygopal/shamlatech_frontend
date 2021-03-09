@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row justify-content-center" style="margin-bottom: 200px;">
+    <div class="col-md-5 col-sm-6 col-10 edit-page">
+      <div class="edit-heading">
+        <h4 class="text-center">Profile Update</h4>
+      </div>
+
+      <!-- firstname,lastname -->
+      <form *ngIf="userData" [formGroup]='userForm'>
+        <div class="form-group">
+          <input type="text" #namerefvar formControlName='firstName' class="form-control" placeholder="firstName">
+          <div *ngIf="userForm.get('firstName').touched && userForm.get('firstName').invalid"
+            class="alert alert-danger">
+            Please enter your First Name
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="text" #namerefvar formControlName='lastName' class="form-control" placeholder="lastName">
+          <div *ngIf="userForm.get('lastName').touched && userForm.get('lastName').invalid" class="alert alert-danger">
+            Please enter your Last Name
+          </div>
+        </div>
+        <!-- <p>{{emailrefvar.className}}</p> -->
+        <!-- (ngSubmit)='onNameSubmit()'-->
+        <div class="form-group">
+          <button type="submit" class='btn btn-outline-primary'
+            [disabled]="!userForm.get('firstName').dirty || !userForm.valid" (click)="updateUserInfo()">Save
+            Changes</button>&nbsp;
+          <button class="btn btn-outline-secondary" (click)="onUserInfoReset()">Cancel</button>&nbsp;
+          <button class="btn btn-outline-secondary" (click)="goBack()">Back</button>
+        </div>
+      </form>
+
+      <hr>
+      <!-- logo update style="width: 250px; height: 200px"-->
+      <div *ngIf="userData" class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div class="col edit1">
+            <img [src]='userData.avatar' width="100px" alt="">
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+
+      <!-- <div class="row">
+
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-8"></div>
+        <div class="col-md-2">
+          
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

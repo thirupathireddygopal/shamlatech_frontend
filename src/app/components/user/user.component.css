@@ -1,0 +1,11 @@
+.nav li a{
+  font-size: 18px;
+  background: #1d84d6;
+  color: #fff;
+  padding: 4px 17px;
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+  margin: 0 1px;
+  text-decoration: none;
+}
+

@@ -1,0 +1,102 @@
+<!--========== login section =================-->
+<div class="register-details">
+
+</div>
+<!--========== end login section =================-->
+<!--using reactive forms-->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10 col-sm-6 col-md-6 register-page">
+      <div class="register-heading">
+        <h4 class="text-center">Register</h4>
+      </div>
+      <form [formGroup]='registerForm' (ngSubmit)='onRegisterSubmit()'>
+        <div class="form-group">
+          <!-- firstName, lastName-->
+          <div class="form-check form-check-inline">
+            <input type="text" class="form-control" formControlName="firstName" placeholder="First Name">
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name">
+          </div>
+          <div *ngIf="registerForm.get('firstName').touched && registerForm.get('firstName').invalid"
+            class="alert alert-danger">
+            <div *ngIf="registerForm.get('firstName').getError('required')">
+              please enter your First Name
+            </div>
+          </div>
+          <div *ngIf="registerForm.get('lastName').touched && registerForm.get('lastName').invalid"
+            class="alert alert-danger">
+            <div *ngIf="registerForm.get('lastName').getError('required')">
+              please enter Last Name
+            </div>
+            <div *ngIf="registerForm.get('phoneNumber').getError('pattern')">
+              Accepts 10 digits
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <!-- countrycode,phonenumber -->
+          <div class="form-check form-check-inline">
+            <input type="text" class="form-control" formControlName="countryCode" placeholder="Country Code">
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="text" class="form-control" formControlName="phoneNumber" placeholder="Phone Number">
+          </div>
+          <div *ngIf="registerForm.get('countryCode').touched && registerForm.get('countryCode').invalid"
+            class="alert alert-danger">
+            <div *ngIf="registerForm.get('countryCode').getError('required')">
+              please enter Country Code
+            </div>
+            <div *ngIf="registerForm.get('countryCode').getError('pattern')">
+              Accepts 3 digits
+            </div>
+          </div>
+          <div *ngIf="registerForm.get('phoneNumber').touched && registerForm.get('phoneNumber').invalid"
+            class="alert alert-danger">
+            <div *ngIf="registerForm.get('phoneNumber').getError('required')">
+              please enter Phone Number
+            </div>
+            <div *ngIf="registerForm.get('phoneNumber').getError('pattern')">
+              Accepts 10 digits
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <!-- email, password-->
+          <div class="form-check form-check-inline">
+            <input type="email" formControlName="email" class="form-control" #mdrefvaremail placeholder="Email">
+            <div *ngIf="registerForm.get('email').touched && registerForm.get('email').invalid"
+              class="alert alert-danger">
+              Please enter your email
+            </div>
+          </div>
+          <div class="form-check form-check-inline">
+            <input type="password" #mdrefvarpassword class="form-control" formControlName="password"
+              placeholder="Password">
+            <div *ngIf="registerForm.get('password').touched && registerForm.get('password').invalid"
+              class="alert alert-danger">
+              <div *ngIf="registerForm.get('password').getError('required')">
+                please enter password
+              </div>
+              <div *ngIf="registerForm.get('password').getError('minlength')">
+                please enter atleast 5 characters
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <re-captcha formControlName="recaptchaReactive" (resolved)="resolved($event)"></re-captcha>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" [disabled]='!registerForm.valid' class='btn btn-primary'>Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- <p>{{registerForm.value | json}}</p> -->
